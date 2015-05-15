@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<book xmlns:xi="http://www.w3.org/2001/XInclude">
+  <bookinfo>
+    <title>Spring Payment Services Reference Manual</title>
+    <titleabbrev>Spring Payment Services &version;</titleabbrev>
+    <productname>Spring Payment Services</productname>
+    <releaseinfo>&version;</releaseinfo>
+
+    <mediaobject>
+      <imageobject role="fo">
+        <imagedata fileref="src/docbkx/resources/images/logo.png"
+          format="PNG" align="center"/>
+      </imageobject>
+      <imageobject role="html">
+        <imagedata fileref="images/logo.png" format="PNG" align="center"/>
+      </imageobject>
+    </mediaobject>
+
+    <authorgroup>
+      <author>
+        <firstname>Rossen</firstname>
+        <surname>Stoyanchev</surname>
+      </author>
+    </authorgroup>
+
+    <legalnotice><para>&copy; SpringSource Inc., 2010</para></legalnotice>
+  </bookinfo>
+
+  <toc></toc>
+
+  <xi:include href="./overview.xml"/>
+
+</book>

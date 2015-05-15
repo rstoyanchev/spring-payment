@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<artifactId>spring-payment-parent</artifactId>
+		<groupId>org.springframework.payment</groupId>
+		<version>0.5.0.SNAPSHOT</version>
+		<relativePath>../parent/pom.xml</relativePath>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>spring-payment-client-cybs</artifactId>
+	<name>CyberSource Gateway Client</name>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<!-- Spring Payment -->
+		<dependency>
+			<groupId>org.springframework.payment</groupId>
+			<artifactId>spring-payment-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- CyberSource + transitive dependencies since CyberSource is not Maven-ized -->
+		<dependency>
+			<groupId>com.cybersource</groupId>
+			<artifactId>cybersource-client</artifactId>
+			<version>1.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.cybersource</groupId>
+			<artifactId>cybersource-security</artifactId>
+			<version>1.5</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version> 		
+		</dependency>
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>xalan</artifactId>
+			<version>2.7.1</version>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.9.1</version>
+		</dependency>
+		<!-- Bean Validation API -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>
+		<!-- Test -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${org.slf4j-version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+</project>

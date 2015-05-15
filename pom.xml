@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.springframework.payment</groupId>
+	<artifactId>spring-payment</artifactId>
+	<name>Spring Payment Services</name>
+	<version>0.5.0.SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>parent</module>
+		<module>core</module>
+		<module>client-cybs</module>
+	</modules>
+
+	<licenses>
+		<license>
+			<name>Apache 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<profiles>
+		<profile>
+			<id>integration</id>
+			<modules>
+				<module>client-cybs-int-tests</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<!-- Docbook: courtesy of the Spring Integration Maven build! -->
+					<plugin>
+						<groupId>com.agilejava.docbkx</groupId>
+						<artifactId>docbkx-maven-plugin</artifactId>
+						<version>2.0.9</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>generate-html</goal>
+									<goal>generate-pdf</goal>
+								</goals>
+								<phase>package</phase>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>org.docbook</groupId>
+								<artifactId>docbook-xml</artifactId>
+								<version>4.4</version>
+								<scope>runtime</scope>
+							</dependency>
+						</dependencies>
+						<configuration>
+							<includes>index.xml</includes>
+							<xincludeSupported>true</xincludeSupported>
+							<foCustomization>${project.basedir}/src/docbkx/resources/xsl/fopdf.xsl</foCustomization>
+							<htmlStylesheet>css/html.css</htmlStylesheet>
+							<chunkedOutput>false</chunkedOutput>
+							<htmlCustomization>${project.basedir}/src/docbkx/resources/xsl/html.xsl</htmlCustomization>
+							<entities>
+								<entity>
+									<name>version</name>
+									<value>${pom.version}</value>
+								</entity>
+							</entities>
+							<postProcess>
+								<copy todir="${project.basedir}/target/site/reference">
+									<fileset dir="${project.basedir}/target/docbkx">
+										<include name="**/*.html" />
+										<include name="**/*.pdf" />
+									</fileset>
+								</copy>
+								<copy todir="${project.basedir}/target/site/reference/html">
+									<fileset dir="${project.basedir}/src/docbkx/resources">
+										<include name="**/*.css" />
+										<include name="**/*.png" />
+										<include name="**/*.gif" />
+										<include name="**/*.jpg" />
+									</fileset>
+								</copy>
+								<move file="${project.basedir}/target/site/reference/pdf/index.pdf"
+									tofile="${project.basedir}/target/site/reference/pdf/spring-payment-reference.pdf"
+									failonerror="false" />
+							</postProcess>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.7</version>
+						<executions>
+							<execution>
+								<id>aggregate</id>
+								<goals>
+									<goal>aggregate</goal>
+								</goals>
+								<phase>package</phase>
+								<configuration>
+									<breakiterator>true</breakiterator>
+									<header>Spring Payment Services</header>
+									<source>1.5</source>
+									<quiet>true</quiet>
+									<javadocDirectory>${project.basedir}/src/main/javadoc</javadocDirectory>
+									<overview>${project.basedir}/src/main/javadoc/overview.html</overview>
+									<stylesheetfile>${project.basedir}/src/main/javadoc/spring-javadoc.css</stylesheetfile>
+									<docfilessubdirs>true</docfilessubdirs>
+									<groups>
+										<group>
+											<title>Spring Payment Common</title>
+											<packages>
+												org.springframework.payment.common*:
+		                                    </packages>
+										</group>
+										<group>
+											<title>Spring Payment Test</title>
+											<packages>
+												org.springframework.payment.test*
+		                                    </packages>
+										</group>
+									</groups>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<version>2.2-beta-5</version>
+						<inherited>false</inherited>
+						<executions>
+							<execution>
+								<id>distribution</id>
+								<phase>package</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+								<configuration>
+									<descriptors>
+										<descriptor>${project.basedir}/src/main/assembly/distribution.xml</descriptor>
+									</descriptors>
+									<appendAssemblyId>true</appendAssemblyId>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+		
+	</profiles>
+
+	<developers>
+		<developer>
+			<id>rstoyanchev</id>
+			<email>rstoyanchev@vmware.com</email>
+			<name>Rossen Stoyanchev</name>
+		</developer>
+	</developers>
+
+</project>
